@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	
+	<record id="hassio_events_form" model="ir.ui.view">
+		<field name="name">hassio.events.form</field>
+		<field name="model">hassio.events</field>
+		<field name="arch" type="xml">
+			<form>
+				<group>
+					<field name="name"/>
+					<field name="listener_count"/>
+				</group>
+			</form>
+		</field>
+	</record>
+	
+	<record id="hassio_events_tree" model="ir.ui.view">
+		<field name="name">hassio.events.tree</field>
+		<field name="model">hassio.events</field>
+		<field name="arch" type="xml">
+			<tree>
+				<field name="name"/>
+				<field name="listener_count"/>
+			</tree>
+		</field>
+	</record>
+
+	<record id="action_hassio_events" model="ir.actions.act_window">
+		<field name="name">Events</field>
+		<field name="res_model">hassio.events</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">tree,form</field>
+	</record>
+
+	<record id="hassio_services_form" model="ir.ui.view">
+		<field name="name">hassio.services.form</field>
+		<field name="model">hassio.services</field>
+		<field name="arch" type="xml">
+			<form>
+				<group>
+					<field name="name"/>
+					<field name="services"/>
+				</group>
+			</form>
+		</field>
+	</record>
+
+	<record id="hassio_services_tree" model="ir.ui.view">
+		<field name="name">hassio.services.tree</field>
+		<field name="model">hassio.services</field>
+		<field name="arch" type="xml">
+			<tree>
+				<field name="name"/>
+				<field name="services"/>
+			</tree>
+		</field>
+	</record>
+	
+	<record id="action_hassio_services" model="ir.actions.act_window">
+		<field name="name">Services</field>
+		<field name="res_model">hassio.services</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">tree,form</field>
+	</record>
+
+	<record id="hassio_states_form" model="ir.ui.view">
+		<field name="name">hassio.states.form</field>
+		<field name="model">hassio.states</field>
+		<field name="arch" type="xml">
+			<form>
+				<group>
+					<field name="name"/>
+					<field name="attributes"/>
+					<field name="last_changed"/>
+					<field name="state"/>
+				</group>
+			</form>
+		</field>
+	</record>
+	
+	<record id="hassio_states_tree" model="ir.ui.view">
+		<field name="name">hassio.states.tree</field>
+		<field name="model">hassio.states</field>
+		<field name="arch" type="xml">
+			<tree>
+				<field name="name"/>
+				<field name="attributes"/>
+				<field name="last_changed"/>
+				<field name="state"/>
+			</tree>
+		</field>
+	</record>
+
+	<record id="action_hassio_states" model="ir.actions.act_window">
+		<field name="name">States</field>
+		<field name="res_model">hassio.states</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">tree,form</field>
+	</record>
+
+	
+	<menuitem id="menu_hassio" name="HassIO"/>
+	<menuitem id="menu_parent_hassio" name="HassIO" parent="menu_hassio"/>
+
+
+	<menuitem id="menu_hassio_events" name="Events" parent="menu_parent_hassio" action="action_hassio_events"/>
+	<menuitem id="menu_hassio_services" name="Services" parent="menu_parent_hassio" action="action_hassio_services"/>
+	<menuitem id="menu_hassio_states" name="States" parent="menu_parent_hassio" action="action_hassio_states"/>
+	
+</odoo>
