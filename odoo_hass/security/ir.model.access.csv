@@ -4,3 +4,7 @@ access_hassio_service,access_hassio_service,model_hassio_service,base.group_user
 access_hassio_services,access_hassio_services,model_hassio_services,base.group_user,1,1,1,1 
 access_hassio_states,access_hassio_states,model_hassio_states,base.group_user,1,1,1,1
 access_hassio_entity,access_hassio_entity,model_hassio_entity,base.group_user,1,1,1,1
+access_hassio_entity_type,access_hassio_entity_type,model_hassio_entity_type,base.group_user,1,1,1,1
+access_hassio_entity_type_properties,access_hassio_entity_type_properties,model_hassio_entity_type_properties,base.group_user,1,1,1,1
+access_hassio_presets,access_hassio_presets,model_hassio_presets,base.group_user,1,1,1,1
+access_hassio_entity_wizard,access_hassio_entity_wizard,model_hassio_entity_wizard,base.group_user,1,1,1,1

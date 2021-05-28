@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<record id="entity_type_light" model="hassio.entity_type">
+		<field name="name">Light</field>
+		<field name="code">light</field>
+	</record>
+	
+	<record id="light_properties_brightness" model="hassio.entity_type.properties">
+		<field name="name">brightness</field>
+		<field name="ttype">int</field>
+		<field name="default">None</field>
+		<field name="description">Return the brightness of this light between 0..255</field>
+	</record>
+
+</odoo>

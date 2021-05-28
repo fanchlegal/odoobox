@@ -9,15 +9,32 @@
 				<header>
 					<button name="get_data" string="get_data" type="object"/>
 				</header>
-				<group>
-					<field name="name"/>
-					<field name="services" context="{ 'entity_id': name }">
-						<tree>
+				<notebook>
+					<page string="HassIO">
+						<group>
 							<field name="name"/>
-							<button name="execute" string="Execute" type="object"/>
-						</tree>
-					</field>
-				</group>
+							<field name="services" context="{ 'entity_id': name }">
+								<tree>
+									<field name="name"/>
+									<button name="execute" string="Execute" type="object"/>
+								</tree>
+							</field>
+							<field name="attributes"/>
+							<field name="friendly_name"/>
+							<field name="ttype"/>
+							<field name="id" invisible="1"/>
+						</group>
+					</page>
+					<page string="Presets">
+						<field name="presets" context="{'default_entity_id': id}">
+							<tree>
+								<field name="name"/>
+								<field name="service"/>
+								<button name="execute" string="Execute" type="object"/>
+							</tree>
+						</field>
+					</page>
+				</notebook>
 			</form>
 		</field>
 	</record>
@@ -27,7 +44,9 @@
 		<field name="model">hassio.entity</field>
 		<field name="arch" type="xml">
 			<tree>
+				<field name="friendly_name"/>
 				<field name="name"/>
+				<field name="ttype"/>
 			</tree>
 		</field>
 	</record>

@@ -13,8 +13,10 @@
     ],
     "data": [
         'security/ir.model.access.csv',
+        'data/entity_type.xml',
 		'views/res_company.xml',
         'views/hassio.xml',
+        'wizard/entity.xml',
     ],
     "demo": [
 	    

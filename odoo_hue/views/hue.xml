@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	
+	<record id="hue_bridge_form" model="ir.ui.view">
+		<field name="name">hue.bridge.form</field>
+		<field name="model">hue.bridge</field>
+		<field name="arch" type="xml">
+			<form>
+				<header>
+					<button name="register" type="object" string="Register" attrs="{'invisible':[('registered','=',True)]}"/>
+					<button name="update" type="object" string="Update"/>
+				</header>
+				<group>
+					<field name="name"/>
+					<field name="server"/>
+					<field name="lights"/>
+					<field name="groups"/>
+					<field name="schedules"/>
+					<field name="registered" invisible="1"/>
+				</group>
+			</form>
+		</field>
+	</record>
+	
+	<record id="hue_bridge_tree" model="ir.ui.view">
+		<field name="name">hue.bridge.tree</field>
+		<field name="model">hue.bridge</field>
+		<field name="arch" type="xml">
+			<tree>
+				<field name="name"/>
+				<field name="server"/>
+			</tree>
+		</field>
+	</record>
+
+	<record id="action_hue_bridge" model="ir.actions.act_window">
+		<field name="name">Bridge Hue</field>
+		<field name="res_model">hue.bridge</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">tree,form</field>
+	</record>
+
+	<menuitem id="menu_hue" name="Hue"/>
+	<menuitem id="menu_hue_bridge" name="Bridge Hue" parent="menu_hue" action="action_hue_bridge"/>
+
+	
+</odoo>
