@@ -1,1 +1,6 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hassio_events,access_hassio_events,model_hassio_events,base.group_user,1,1,1,1
+access_hassio_service,access_hassio_service,model_hassio_service,base.group_user,1,1,1,1 
+access_hassio_services,access_hassio_services,model_hassio_services,base.group_user,1,1,1,1 
+access_hassio_states,access_hassio_states,model_hassio_states,base.group_user,1,1,1,1
+access_hassio_entity,access_hassio_entity,model_hassio_entity,base.group_user,1,1,1,1
