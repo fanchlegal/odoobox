@@ -36,7 +36,6 @@
 	<record id="action_hue_bridge" model="ir.actions.act_window">
 		<field name="name">Bridge Hue</field>
 		<field name="res_model">hue.bridge</field>
-		<field name="view_type">form</field>
 		<field name="view_mode">tree,form</field>
 	</record>
 

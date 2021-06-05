@@ -34,6 +34,18 @@ def rgb_to_xy(red, green, blue):
 	 
 	return [x, y]
 
+class hue_group(models.Model):
+	_name = "hue.group"
+
+	name = fields.Char('Name')
+	bridge_id = fields.Many2one('hue.bridge',string="Bridge")
+	lights = fields.One2many('hue.light','group_id',string='Lights')
+	
+class hue_schedule(models.Model):
+	_name = "hue.schedule"
+
+	name = fields.Char('Name')
+	bridge_id = fields.Many2one('hue.bridge',string="Bridge")
 
 class hue_light(models.Model):
 	_name = 'hue.light'
@@ -45,27 +57,44 @@ class hue_light(models.Model):
 	saturation = fields.Integer('Saturation')
 	light_id = fields.Integer('Light ID')
 	bridge_id = fields.Many2one('hue.bridge',string="Bridge")
+	group_id = fields.Many2one('hue.group',string="Group")
 	
 	@api.onchange('on')
 	def onchange_on(self):
-		b = phue.Bridge(self.bridge_ip.server)
-		if self.on:		
-			b.set_light(self.light_id,'on', True)
-		else:
-			b.set_light(self.light_id,'on',False)
+		b = phue.Bridge(self.bridge_id.server)
+		lights = b.get_light_objects('id')
+		light = lights[self.light_id]
+		light.on = self.on
+			
 			
 	@api.onchange('brightness','hue','saturation')
 	def onchange_brightness(self):
-		b = phue.Bridge(self.bridge_ip.server)
+		b = phue.Bridge(self.bridge_id.server)
+		lights = b.get_light_objects('id')
+		light = lights[self.light_id]
 		if self.brightness:
-			b.set_light(light_id,'brightness',self.brightness)
+			light.brightmess = self.brightness
+		"""
 		if self.hue:
 			b.set_light(light_id,'hue',self.hue)
 		if self.saturation:
 			b.set_light(light_id,'saturation',self.saturation)
-		
-
-
+		"""
+	
+	def set_on(self):
+		b = phue.Bridge(self.bridge_id.server)
+		lights = b.get_light_objects('id')
+		for l in self:
+			light = lights[l.light_id]
+			light.on = True
+	
+	def set_off(self):
+		b = phue.Bridge(self.bridge_id.server)
+		lights = b.get_light_objects('id')
+		for l in self:
+			light = lights[l.light_id]
+			light.on = False		
+			
 class hue_bridge(models.Model):
 	_name = 'hue.bridge'
 	
@@ -79,6 +108,7 @@ class hue_bridge(models.Model):
 	def register(self):
 		b = phue.Bridge(self.server)
 		b.connect()
+		self.registered = True
 		
 	def update(self):
 		b = phue.Bridge(self.server)
@@ -87,13 +117,48 @@ class hue_bridge(models.Model):
 		lights = b.lights
 		
 		for light in lights:
+			logger.info(light.__dict__)
 			value = {
 				'name': light.name,
-				'light_id': light.id,
+				'light_id': light.light_id,
 				'on': light.on,
 				'brightness': light.brightness,
-				'saturation': light.saturation,
-				'hue': light.hue,
-				'bridge_ip': self.id
+				#'saturation': light.saturation,
+				#'hue': light.hue,
+				'bridge_id': self.id
 			}
-			self.env['hue.light'].create(value)
+			odoo_light = self.env['hue.light'].search([('light_id','=',light.light_id)])
+			if odoo_light:
+				odoo_light.write(value)
+			else:
+				self.env['hue.light'].create(value)
+				
+		groups = b.get_group()
+		logger.info(groups)
+		for group in groups.keys():
+
+			value = {
+				'name': groups[group]['name'],
+				'bridge_id': self.id	
+			}
+			odoo_group = self.env['hue.group'].search([('name','=',group)])
+			if odoo_group:
+				odoo_group.write(value)
+			else:
+				ooo_group = self.env['hue.group'].create(value)
+			
+			for light_id in groups[group]['lights']:
+				light = self.env['hue.light'].search([('light_id','=',int(light_id))])
+				light.group_id = odoo_group.id
+			
+		schedules = b.get_schedule()
+		for schedule in schedules:
+			value = {
+				'name': schedule,
+				'bridge_id': self.id
+			}
+			odoo_schedule = self.env['hue.schedule'].search([('name','=',schedule)])
+			if odoo_schedule:
+				odoo_schedule.write(value)
+			else:
+				self.env['hue.schedule'].create(value)

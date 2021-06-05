@@ -1,1 +1,5 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hue_group,access_hue_group,model_hue_group,base.group_user,1,1,1,1
+access_hue_schedule,access_hue_schedule,model_hue_schedule,base.group_user,1,1,1,1
+access_hue_light,access_hue_light,model_hue_light,base.group_user,1,1,1,1
+access_hue_bridge,access_hue_bridge,model_hue_bridge,base.group_user,1,1,1,1
