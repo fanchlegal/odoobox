@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	
+	<record id="odoo_hifiberry_form" model="ir.ui.view">
+		<field name="name">odoo.hifiberry.form</field>
+		<field name="model">odoo.hifiberry</field>
+		<field name="arch" type="xml">
+			<form>
+				<group>
+					<field name="name"/>
+					<field name="server"/>
+					<field name="status" readonly="1"/>
+				</group>
+			</form>
+		</field>
+	</record>
+	
+	<record id="odoo_hifiberry_tree" model="ir.ui.view">
+		<field name="name">odoo.hifiberry.tree</field>
+		<field name="model">odoo.hifiberry</field>
+		<field name="arch" type="xml">
+			<tree>
+				<field name="name"/>
+				<field name="server"/>
+			</tree>
+		</field>
+	</record>
+
+	<record id="action_odoo_hifiberry" model="ir.actions.act_window">
+		<field name="name">Hifiberry</field>
+		<field name="res_model">odoo.hifiberry</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">tree,form</field>
+	</record>
+
+	<menuitem id="menu_parent_odoo_hifiberry" name="Hifiberry"/>
+
+	<menuitem id="menu_odoo_hifiberry" name="Hifiberry" parent="menu_parent_odoo_hifiberry" action="action_odoo_hifiberry"/>
+
+	
+</odoo>
