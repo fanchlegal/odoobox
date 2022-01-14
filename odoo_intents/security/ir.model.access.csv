@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+odoo_intents.access_odoo_action,access_odoo_action,odoo_intents.model_odoo_action,base.group_user,1,1,1,1
+odoo_intents.access_odoo_intent,access_odoo_intent,odoo_intents.model_odoo_intent,base.group_user,1,1,1,1
