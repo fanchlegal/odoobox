@@ -2,14 +2,14 @@
 
 import json
 
-from odoo import exceptions, _
+from odoo import exceptions, _, http
 from odoo.http import Controller, request, route
 
 
 class HomeBusController(Controller):
 	
 	
-	@http.route('/lonpolling/post', type='http', auth="public")
+	@http.route('/lonpolling/post', type='http', auth="public",csrf=False)
 	def longpolling_post(self,login,password,channel,type,message):
 		try:
 			uid = request.session.authenticate(request.session.db, request.params['login'], request.params['password'])
