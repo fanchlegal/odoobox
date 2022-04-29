@@ -9,8 +9,8 @@ from odoo.http import Controller, request, route
 class HomeBusController(Controller):
 	
 	
-	@http.route('/lonpolling/post', type='http', auth="public",csrf=False)
-	def longpolling_post(self,login,password,channel,type,message):
+	@http.route('/bus/post', type='http', auth="public",csrf=False)
+	def bus_post(self,login,password,channel,type,message):
 		logger.info(request.params)
 		try:
 			uid = request.session.authenticate(request.session.db, request.params['login'], request.params['password'])
