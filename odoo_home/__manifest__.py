@@ -10,6 +10,7 @@
     "description": "Home automation for Odoo",
     "depends": [
         'base',
+        'bus',
     ],
     "data": [
         'security/ir.model.access.csv',
