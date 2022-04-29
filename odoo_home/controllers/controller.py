@@ -4,7 +4,8 @@ import json
 
 from odoo import exceptions, _, http
 from odoo.http import Controller, request, route
-
+import logging
+logger = logging.getLogger(__name__)
 
 class HomeBusController(Controller):
 	
