@@ -25,4 +25,4 @@ class HomeBusController(Controller):
 			logger.info(str(e))
 			return request.not_found()
 			
-		return True
+		return {}
