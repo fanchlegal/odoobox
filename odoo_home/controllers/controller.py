@@ -15,7 +15,7 @@ class HomeBusController(Controller):
 			uid = request.session.authenticate(request.session.db, request.params['login'], request.params['password'])
 			
 			request.env['bus.bus']._sendone(request.params['channel'],request.params['type'],request.params['message'])
-			
+			logger.info("Message MQTT reçu")
 			
 			
 			
